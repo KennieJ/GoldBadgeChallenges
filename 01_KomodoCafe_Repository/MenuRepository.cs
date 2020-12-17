@@ -28,9 +28,9 @@ namespace _01_KomodoCafe_Repository
             return _listOfMenuItems;
         }
 
-        public List<string> GetIngredientList()
+        public List<string> GetIngredientList(Meal meal)
         {
-            return _listOfIngredients;
+            return meal.ListOfIngredients;
         }
         
         //Update

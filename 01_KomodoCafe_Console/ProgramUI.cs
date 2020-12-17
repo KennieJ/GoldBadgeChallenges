@@ -14,7 +14,18 @@ namespace _01_KomodoCafe_Console
 
         public void Run()
         {
+            Seed();
             Menu();
+        }
+
+        private void Seed()
+        {
+            var hotdog = new Meal("1", "Komodo Dog", "An adventure for your tastebuds!", 5.25, new List<string> { "Komodo meat", "stale bun", "diced onions" });
+            var bowl = new Meal("2", "Vegan Komodo Bowl", "A vegan adventure for your tastebuds!", 10.25, new List<string> { "lab-grown Komodo meat", "kale", "ModoSauce" });
+
+            _menuRepo.AddItemToList(hotdog);
+            _menuRepo.AddItemToList(bowl);
+
         }
 
         private void Menu()
@@ -93,11 +104,11 @@ namespace _01_KomodoCafe_Console
             List<string> listOfIngredientsString = Console.ReadLine().Split(',').ToList();
             var listOfIngredientsToAdd = new List<string>();
 
-            foreach(string ingredientString in listOfIngredientsString)
+            foreach(string ingredient in listOfIngredientsString)
             {
-                string newIngredient = _menuRepo.GetIngredientByName(ingredientString);
-                listOfIngredientsToAdd.Add(newIngredient);
+                listOfIngredientsToAdd.Add(ingredient);
             }
+            newMeal.ListOfIngredients = listOfIngredientsToAdd;
 
             _menuRepo.AddItemToList(newMeal);
         }
@@ -130,11 +141,11 @@ namespace _01_KomodoCafe_Console
             List<string> listOfIngredientsString = Console.ReadLine().Split(',').ToList();
             var listOfIngredientsToAdd = new List<string>();
 
-            foreach (string ingredientString in listOfIngredientsString)
+            foreach (string ingredient in listOfIngredientsString)
             {
-                string newIngredient = _menuRepo.GetIngredientByName(ingredientString);
-                listOfIngredientsToAdd.Add(newIngredient);
+                listOfIngredientsToAdd.Add(ingredient);
             }
+            newMeal.ListOfIngredients = listOfIngredientsToAdd;
 
             //verify
             bool wasUpdated = _menuRepo.UpdateExistingMeal(oldItemNumber, newMeal);
@@ -189,14 +200,12 @@ namespace _01_KomodoCafe_Console
 
         private void DisplayMealDetails(Meal displayMeal)
         {
-            Console.WriteLine($"{displayMeal.ItemNumber}. {displayMeal.MealName}:\n" +
+            Console.Clear();
+            Console.WriteLine($"{displayMeal.ItemNumber}. {displayMeal.MealName}: ${displayMeal.MealPrice}\n" +
                 $"{displayMeal.MealDescription}\n" +
                 $"Ingredients:");
-            displayMeal.ListOfIngredients = _menuRepo.GetIngredientList();
-            foreach(var ingredient in displayMeal.ListOfIngredients)
-            {
-                DisplayIngredient(ingredient);
-            }
+            DisplayIngredientList(displayMeal);
+            
         }
 
         private void DisplayAllMenuItems()
@@ -206,13 +215,22 @@ namespace _01_KomodoCafe_Console
             List<Meal> listOfMeals = _menuRepo.GetMealList();
             foreach(Meal meal in listOfMeals)
             {
-                Console.WriteLine($"{meal.ItemNumber}. {meal.MealName}");
+                Console.WriteLine($"{meal.ItemNumber}. {meal.MealName}: ${meal.MealPrice}");
             }
         }
         
         private void DisplayIngredient(string ingredient)
         {
             Console.WriteLine($"{ingredient}");
+        }
+
+        private void DisplayIngredientList(Meal meal)
+        {
+            List<string> ingredientList = _menuRepo.GetIngredientList(meal);
+            foreach(string ingredient in ingredientList)
+            {
+                Console.WriteLine(ingredient);
+            }
         }
     }
 }
