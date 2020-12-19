@@ -45,5 +45,11 @@
     <Compile Include="MenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\02_ClaimsRepository\02_ClaimsRepository.csproj">
+      <Project>{c36b1690-0284-42e3-87eb-072e3ce07ccb}</Project>
+      <Name>02_ClaimsRepository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
