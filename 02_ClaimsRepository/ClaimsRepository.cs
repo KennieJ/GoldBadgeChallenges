@@ -22,7 +22,7 @@ namespace _02_ClaimsRepository
             return _queueOfClaims;
         }
 
-        //Update
+        //Update: not requested by Komodo
         
 
         //Delete: Agent dealt with claim

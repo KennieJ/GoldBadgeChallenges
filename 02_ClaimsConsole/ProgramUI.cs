@@ -79,6 +79,7 @@ namespace _02_ClaimsConsole
                 Console.WriteLine($"{claim.ClaimID}\t{claim.Type}\t{claim.Description}\t${claim.ClaimAmount}\t{claim.DateOfIncident:d}\t" +
                     $"{claim.DateOfClaim:d}\t{claim.IsValid}");
             }
+                Console.WriteLine("");
         }
 
         private void ShowNextClaim()
@@ -105,11 +106,13 @@ namespace _02_ClaimsConsole
 
                 if (dequeueCheck)
                 {
-                    Console.WriteLine("Claim has been removed from queue");
+                    Console.Clear();
+                    Console.WriteLine("Claim has been removed from queue\n");
                 }
                 else
                 {
-                    Console.WriteLine("Claim has not been removed from queue");
+                    Console.Clear();
+                    Console.WriteLine("Claim has not been removed from queue\n");
                 }
             }
             else if(input.ToLower() == "n")
@@ -147,12 +150,12 @@ namespace _02_ClaimsConsole
             double claimAmountAsDouble = double.Parse(claimAmountAsString);
             newClaim.ClaimAmount = claimAmountAsDouble;
 
-            Console.WriteLine("Date of Accident:");
+            Console.WriteLine("Date of Accident (YYYY,MM,DD):");
             string accidentDateString = Console.ReadLine();
             DateTime accidentDate = DateTime.Parse(accidentDateString);
             newClaim.DateOfIncident = accidentDate;
 
-            Console.WriteLine("Date of Claim:");
+            Console.WriteLine("Date of Claim (YYYY,MM,DD):");
             string claimDateString = Console.ReadLine();
             DateTime claimDate = DateTime.Parse(claimDateString);
             newClaim.DateOfClaim = claimDate;
