@@ -182,11 +182,11 @@ namespace _03_BadgesConsole
         private void DisplayDoorList()
         {
             Dictionary<int, Badge> badgeDictionary = _repo.GetAllBadges();
-            List<string> _doorList = _repo.GetDoorList();
-            var doorstring = string.Join(",", _doorList);
 
             foreach(var badge in badgeDictionary)
             {
+            List<string> _doorList = _repo.GetDoorList(badge.Value);
+            var doorstring = string.Join(",", _doorList);
                 Console.WriteLine($"{badge.Key}\t{doorstring}");
             }
 

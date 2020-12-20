@@ -23,8 +23,9 @@ namespace _03_BadgesRepository
             return _badgeDictionary;
         }
 
-        public List<string> GetDoorList()
+        public List<string> GetDoorList(Badge badge)
         {
+            _listOfDoors = badge.DoorNames;
             return _listOfDoors;
         }
         
